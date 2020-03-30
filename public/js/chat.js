@@ -10,6 +10,9 @@ const $messages = document.getElementById('messages');
 // Templates
 const messageTemplate = document.getElementById('message-template')
   .innerHTML;
+const locationMessageTemplate = document.getElementById(
+  'location-template'
+).innerHTML;
 
 socket.on('message', (message) => {
   console.log(message);
@@ -23,6 +26,10 @@ socket.on('message', (message) => {
 
 socket.on('locationMessage', (url) => {
   console.log(url);
+
+  const html = Mustache.render(locationMessageTemplate, { url });
+
+  $messages.insertAdjacentHTML('beforeend', html);
 });
 
 $messageForm.addEventListener('submit', (e) => {
