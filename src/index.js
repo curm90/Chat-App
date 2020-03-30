@@ -16,6 +16,10 @@ io.on('connection', (socket) => {
   console.log('new web socket connection');
 
   socket.emit('message', 'Welcome User!');
+
+  socket.on('sendMessage', (message) => {
+    io.emit('message', message);
+  });
 });
 
 server.listen(port, () => {
