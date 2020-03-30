@@ -14,9 +14,15 @@ const messageTemplate = document.getElementById('message-template')
 socket.on('message', (message) => {
   console.log(message);
 
-  const html = Mustache.render(messageTemplate);
+  const html = Mustache.render(messageTemplate, {
+    message
+  });
 
   $messages.insertAdjacentHTML('beforeend', html);
+});
+
+socket.on('locationMessage', (url) => {
+  console.log(url);
 });
 
 $messageForm.addEventListener('submit', (e) => {
