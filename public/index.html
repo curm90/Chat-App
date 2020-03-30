@@ -10,8 +10,12 @@
   </head>
   <body>
     <h1>Chat app</h1>
-    <form>
-      <input type="text" placeholder="Type message..." />
+    <form id="message-form">
+      <input
+        name="message"
+        type="text"
+        placeholder="Type message..."
+      />
       <button>Submit</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
