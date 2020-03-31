@@ -39,12 +39,15 @@ io.on('connection', (socket) => {
 
     socket.join(user.room);
 
-    socket.emit('message', generateMessage('Welcome!'));
+    socket.emit(
+      'message',
+      generateMessage('Admin', `Welcome ${user.username}`)
+    );
     socket.broadcast
       .to(user.room)
       .emit(
         'message',
-        generateMessage(`${user.username} has joined!`)
+        generateMessage('Admin', `${user.username} has joined!`)
       );
 
     callback();
@@ -58,7 +61,10 @@ io.on('connection', (socket) => {
       return callback('Profanity is not allowed');
     }
 
-    io.to(user.room).emit('message', generateMessage(message));
+    io.to(user.room).emit(
+      'message',
+      generateMessage(user.username, message)
+    );
     callback('Delivered!');
   });
 
@@ -68,6 +74,7 @@ io.on('connection', (socket) => {
     io.to(user.room).emit(
       'locationMessage',
       generateLocationMessage(
+        user.username,
         `https://google.com/maps?=${location.latitude},${location.longitude}`
       )
     );
@@ -80,7 +87,7 @@ io.on('connection', (socket) => {
     if (user) {
       io.to(user.room).emit(
         'message',
-        generateMessage(`${user.username} has left`)
+        generateMessage('Admin', `${user.username} has left`)
       );
     }
   });
