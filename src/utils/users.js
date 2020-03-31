@@ -46,30 +46,9 @@ const getUsersInRoom = (room) => {
   return users.filter((user) => user.room === room.toLowerCase());
 };
 
-addUser({
-  id: 22,
-  username: 'Liam',
-  room: 'Toronto'
-});
-
-addUser({
-  id: 42,
-  username: 'Mike',
-  room: 'Toronto'
-});
-
-addUser({
-  id: 44,
-  username: 'Mollie',
-  room: 'Philly'
-});
-
-// console.log(getUser(44));
-console.log(getUsersInRoom('Toronto'));
-
-// console.log(users);
-
-// const removedUser = removeUser(22);
-// console.log(removedUser);
-
-// console.log(users);
+module.exports = {
+  addUser,
+  getUsersInRoom,
+  getUser,
+  removeUser
+};
